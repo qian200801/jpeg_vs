@@ -77,8 +77,7 @@ static const char * const cdjpeg_message_table[] = {
 static boolean is_targa;	/* records user -targa switch */
 
 
-LOCAL(cjpeg_source_ptr)
-select_file_type(j_compress_ptr cinfo, FILE * infile)
+LOCAL(cjpeg_source_ptr) select_file_type(j_compress_ptr cinfo, FILE * infile)
 {
 	int c;
 
@@ -138,8 +137,7 @@ static const char * progname;	/* program name for error messages */
 static char * outfilename;	/* for -outfile switch */
 
 
-LOCAL(void)
-usage(void)
+LOCAL(void) usage(void)
 /* complain about bad command line */
 {
 	fprintf(stderr, "usage: %s [switches] ", progname);
@@ -208,8 +206,7 @@ usage(void)
 }
 
 
-LOCAL(int)
-parse_switches(j_compress_ptr cinfo, int argc, char **argv,
+LOCAL(int) parse_switches(j_compress_ptr cinfo, int argc, char **argv,
 	int last_file_arg_seen, boolean for_real)
 	/* Parse optional switches.
 	 * Returns argv[] index of first file-name argument (== argc if none).
