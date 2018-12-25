@@ -143,6 +143,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\jpeg-9c\cderror.h" />
+    <ClInclude Include="..\jpeg-9c\cdjpeg.h" />
+    <ClInclude Include="..\jpeg-9c\jconfig.h" />
+    <ClInclude Include="..\jpeg-9c\jerror.h" />
+    <ClInclude Include="..\jpeg-9c\jinclude.h" />
+    <ClInclude Include="..\jpeg-9c\jmorecfg.h" />
+    <ClInclude Include="..\jpeg-9c\jpeglib.h" />
+    <ClInclude Include="..\jpeg-9c\jversion.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\jpeg-9c\cdjpeg.c" />
+    <ClCompile Include="..\jpeg-9c\cjpeg.c" />
+    <ClCompile Include="..\jpeg-9c\rdbmp.c" />
+    <ClCompile Include="..\jpeg-9c\rdgif.c" />
+    <ClCompile Include="..\jpeg-9c\rdppm.c" />
+    <ClCompile Include="..\jpeg-9c\rdrle.c" />
+    <ClCompile Include="..\jpeg-9c\rdswitch.c" />
+    <ClCompile Include="..\jpeg-9c\rdtarga.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

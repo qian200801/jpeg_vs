@@ -12,57 +12,57 @@
  */
 
 
-/*
- * Define BITS_IN_JSAMPLE as either
- *   8   for 8-bit sample values (the usual setting)
- *   9   for 9-bit sample values
- *   10  for 10-bit sample values
- *   11  for 11-bit sample values
- *   12  for 12-bit sample values
- * Only 8, 9, 10, 11, and 12 bits sample data precision are supported for
- * full-feature DCT processing.  Further depths up to 16-bit may be added
- * later for the lossless modes of operation.
- * Run-time selection and conversion of data precision will be added later
- * and are currently not supported, sorry.
- * Exception:  The transcoding part (jpegtran) supports all settings in a
- * single instance, since it operates on the level of DCT coefficients and
- * not sample values.  The DCT coefficients are of the same type (16 bits)
- * in all cases (see below).
- */
+ /*
+  * Define BITS_IN_JSAMPLE as either
+  *   8   for 8-bit sample values (the usual setting)
+  *   9   for 9-bit sample values
+  *   10  for 10-bit sample values
+  *   11  for 11-bit sample values
+  *   12  for 12-bit sample values
+  * Only 8, 9, 10, 11, and 12 bits sample data precision are supported for
+  * full-feature DCT processing.  Further depths up to 16-bit may be added
+  * later for the lossless modes of operation.
+  * Run-time selection and conversion of data precision will be added later
+  * and are currently not supported, sorry.
+  * Exception:  The transcoding part (jpegtran) supports all settings in a
+  * single instance, since it operates on the level of DCT coefficients and
+  * not sample values.  The DCT coefficients are of the same type (16 bits)
+  * in all cases (see below).
+  */
 
 #define BITS_IN_JSAMPLE  8	/* use 8, 9, 10, 11, or 12 */
 
 
-/*
- * Maximum number of components (color channels) allowed in JPEG image.
- * To meet the letter of the JPEG spec, set this to 255.  However, darn
- * few applications need more than 4 channels (maybe 5 for CMYK + alpha
- * mask).  We recommend 10 as a reasonable compromise; use 4 if you are
- * really short on memory.  (Each allowed component costs a hundred or so
- * bytes of storage, whether actually used in an image or not.)
- */
+  /*
+   * Maximum number of components (color channels) allowed in JPEG image.
+   * To meet the letter of the JPEG spec, set this to 255.  However, darn
+   * few applications need more than 4 channels (maybe 5 for CMYK + alpha
+   * mask).  We recommend 10 as a reasonable compromise; use 4 if you are
+   * really short on memory.  (Each allowed component costs a hundred or so
+   * bytes of storage, whether actually used in an image or not.)
+   */
 
 #define MAX_COMPONENTS  10	/* maximum number of image components */
 
 
-/*
- * Basic data types.
- * You may need to change these if you have a machine with unusual data
- * type sizes; for example, "char" not 8 bits, "short" not 16 bits,
- * or "long" not 32 bits.  We don't care whether "int" is 16 or 32 bits,
- * but it had better be at least 16.
- */
+   /*
+	* Basic data types.
+	* You may need to change these if you have a machine with unusual data
+	* type sizes; for example, "char" not 8 bits, "short" not 16 bits,
+	* or "long" not 32 bits.  We don't care whether "int" is 16 or 32 bits,
+	* but it had better be at least 16.
+	*/
 
-/* Representation of a single sample (pixel element value).
- * We frequently allocate large arrays of these, so it's important to keep
- * them small.  But if you have memory to burn and access to char or short
- * arrays is very slow on your hardware, you might want to change these.
- */
+	/* Representation of a single sample (pixel element value).
+	 * We frequently allocate large arrays of these, so it's important to keep
+	 * them small.  But if you have memory to burn and access to char or short
+	 * arrays is very slow on your hardware, you might want to change these.
+	 */
 
 #if BITS_IN_JSAMPLE == 8
-/* JSAMPLE should be the smallest type that will hold the values 0..255.
- * You can use a signed char by having GETJSAMPLE mask it with 0xFF.
- */
+	 /* JSAMPLE should be the smallest type that will hold the values 0..255.
+	  * You can use a signed char by having GETJSAMPLE mask it with 0xFF.
+	  */
 
 #ifdef HAVE_UNSIGNED_CHAR
 
@@ -181,7 +181,7 @@ typedef char JOCTET;
  * typedefs live at a different point on the speed/space tradeoff curve.)
  */
 
-/* UINT8 must hold at least the values 0..255. */
+ /* UINT8 must hold at least the values 0..255. */
 
 #ifdef HAVE_UNSIGNED_CHAR
 typedef unsigned char UINT8;
@@ -238,7 +238,7 @@ typedef unsigned int JDIMENSION;
  * or code profilers that require it.
  */
 
-/* a function called through method pointers: */
+ /* a function called through method pointers: */
 #define METHODDEF(type)		static type
 /* a function used only in its module: */
 #define LOCAL(type)		static type
@@ -261,20 +261,20 @@ typedef unsigned int JDIMENSION;
 #endif
 
 
-/* The noreturn type identifier is used to declare functions
- * which cannot return.
- * Compilers can thus create more optimized code and perform
- * better checks for warnings and errors.
- * Static analyzer tools can make improved inferences about
- * execution paths and are prevented from giving false alerts.
- *
- * Unfortunately, the proposed specifications of corresponding
- * extensions in the Dec 2011 ISO C standard revision (C11),
- * GCC, MSVC, etc. are not viable.
- * Thus we introduce a user defined type to declare noreturn
- * functions at least for clarity.  A proper compiler would
- * have a suitable noreturn type to match in place of void.
- */
+ /* The noreturn type identifier is used to declare functions
+  * which cannot return.
+  * Compilers can thus create more optimized code and perform
+  * better checks for warnings and errors.
+  * Static analyzer tools can make improved inferences about
+  * execution paths and are prevented from giving false alerts.
+  *
+  * Unfortunately, the proposed specifications of corresponding
+  * extensions in the Dec 2011 ISO C standard revision (C11),
+  * GCC, MSVC, etc. are not viable.
+  * Thus we introduce a user defined type to declare noreturn
+  * functions at least for clarity.  A proper compiler would
+  * have a suitable noreturn type to match in place of void.
+  */
 
 #ifndef HAVE_NORETURN_T
 typedef void noreturn_t;
@@ -296,16 +296,16 @@ typedef void noreturn_t;
 #endif
 
 
-/*
- * On a few systems, type boolean and/or its values FALSE, TRUE may appear
- * in standard header files.  Or you may have conflicts with application-
- * specific header files that you want to include together with these files.
- * Defining HAVE_BOOLEAN before including jpeglib.h should make it work.
- */
+ /*
+  * On a few systems, type boolean and/or its values FALSE, TRUE may appear
+  * in standard header files.  Or you may have conflicts with application-
+  * specific header files that you want to include together with these files.
+  * Defining HAVE_BOOLEAN before including jpeglib.h should make it work.
+  */
 
 #ifndef HAVE_BOOLEAN
 #if defined FALSE || defined TRUE || defined QGLOBAL_H
-/* Qt3 defines FALSE and TRUE as "const" variables in qglobal.h */
+  /* Qt3 defines FALSE and TRUE as "const" variables in qglobal.h */
 typedef int boolean;
 #ifndef FALSE			/* in case these macros already exist */
 #define FALSE	0		/* values of boolean */
@@ -333,15 +333,15 @@ typedef enum { FALSE = 0, TRUE = 1 } boolean;
 #ifdef JPEG_INTERNAL_OPTIONS
 
 
-/*
- * These defines indicate whether to include various optional functions.
- * Undefining some of these symbols will produce a smaller but less capable
- * library.  Note that you can leave certain source files out of the
- * compilation/linking process if you've #undef'd the corresponding symbols.
- * (You may HAVE to do that if your compiler doesn't like null source files.)
- */
+ /*
+  * These defines indicate whether to include various optional functions.
+  * Undefining some of these symbols will produce a smaller but less capable
+  * library.  Note that you can leave certain source files out of the
+  * compilation/linking process if you've #undef'd the corresponding symbols.
+  * (You may HAVE to do that if your compiler doesn't like null source files.)
+  */
 
-/* Capability options common to encoder and decoder: */
+  /* Capability options common to encoder and decoder: */
 
 #define DCT_ISLOW_SUPPORTED	/* slow but accurate integer algorithm */
 #define DCT_IFAST_SUPPORTED	/* faster, less accurate integer method */
@@ -365,7 +365,7 @@ typedef enum { FALSE = 0, TRUE = 1 } boolean;
  */
 #define INPUT_SMOOTHING_SUPPORTED   /* Input image smoothing option? */
 
-/* Decoder capability options: */
+ /* Decoder capability options: */
 
 #define D_ARITH_CODING_SUPPORTED    /* Arithmetic coding back end? */
 #define D_MULTISCAN_FILES_SUPPORTED /* Multiple-scan JPEG files? */
@@ -400,12 +400,12 @@ typedef enum { FALSE = 0, TRUE = 1 } boolean;
 #define RGB_PIXELSIZE	3	/* JSAMPLEs per RGB scanline element */
 
 
-/* Definitions for speed-related optimizations. */
+ /* Definitions for speed-related optimizations. */
 
 
-/* If your compiler supports inline functions, define INLINE
- * as the inline keyword; otherwise define it as empty.
- */
+ /* If your compiler supports inline functions, define INLINE
+  * as the inline keyword; otherwise define it as empty.
+  */
 
 #ifndef INLINE
 #ifdef __GNUC__			/* for instance, GNU C knows about inline */
@@ -417,23 +417,23 @@ typedef enum { FALSE = 0, TRUE = 1 } boolean;
 #endif
 
 
-/* On some machines (notably 68000 series) "int" is 32 bits, but multiplying
- * two 16-bit shorts is faster than multiplying two ints.  Define MULTIPLIER
- * as short on such a machine.  MULTIPLIER must be at least 16 bits wide.
- */
+  /* On some machines (notably 68000 series) "int" is 32 bits, but multiplying
+   * two 16-bit shorts is faster than multiplying two ints.  Define MULTIPLIER
+   * as short on such a machine.  MULTIPLIER must be at least 16 bits wide.
+   */
 
 #ifndef MULTIPLIER
 #define MULTIPLIER  int		/* type for fastest integer multiply */
 #endif
 
 
-/* FAST_FLOAT should be either float or double, whichever is done faster
- * by your compiler.  (Note that this type is only used in the floating point
- * DCT routines, so it only matters if you've defined DCT_FLOAT_SUPPORTED.)
- * Typically, float is faster in ANSI C compilers, while double is faster in
- * pre-ANSI compilers (because they insist on converting to double anyway).
- * The code below therefore chooses float if we have ANSI-style prototypes.
- */
+   /* FAST_FLOAT should be either float or double, whichever is done faster
+	* by your compiler.  (Note that this type is only used in the floating point
+	* DCT routines, so it only matters if you've defined DCT_FLOAT_SUPPORTED.)
+	* Typically, float is faster in ANSI C compilers, while double is faster in
+	* pre-ANSI compilers (because they insist on converting to double anyway).
+	* The code below therefore chooses float if we have ANSI-style prototypes.
+	*/
 
 #ifndef FAST_FLOAT
 #ifdef HAVE_PROTOTYPES

@@ -9,28 +9,28 @@
  * This include file contains common declarations for the forward and
  * inverse DCT modules.  These declarations are private to the DCT managers
  * (jcdctmgr.c, jddctmgr.c) and the individual DCT algorithms.
- * The individual DCT algorithms are kept in separate files to ease 
+ * The individual DCT algorithms are kept in separate files to ease
  * machine-dependent tuning (e.g., assembly coding).
  */
 
 
-/*
- * A forward DCT routine is given a pointer to an input sample array and
- * a pointer to a work area of type DCTELEM[]; the DCT is to be performed
- * in-place in that buffer.  Type DCTELEM is int for 8-bit samples, INT32
- * for 12-bit samples.  (NOTE: Floating-point DCT implementations use an
- * array of type FAST_FLOAT, instead.)
- * The input data is to be fetched from the sample array starting at a
- * specified column.  (Any row offset needed will be applied to the array
- * pointer before it is passed to the FDCT code.)
- * Note that the number of samples fetched by the FDCT routine is
- * DCT_h_scaled_size * DCT_v_scaled_size.
- * The DCT outputs are returned scaled up by a factor of 8; they therefore
- * have a range of +-8K for 8-bit data, +-128K for 12-bit data.  This
- * convention improves accuracy in integer implementations and saves some
- * work in floating-point ones.
- * Quantization of the output coefficients is done by jcdctmgr.c.
- */
+ /*
+  * A forward DCT routine is given a pointer to an input sample array and
+  * a pointer to a work area of type DCTELEM[]; the DCT is to be performed
+  * in-place in that buffer.  Type DCTELEM is int for 8-bit samples, INT32
+  * for 12-bit samples.  (NOTE: Floating-point DCT implementations use an
+  * array of type FAST_FLOAT, instead.)
+  * The input data is to be fetched from the sample array starting at a
+  * specified column.  (Any row offset needed will be applied to the array
+  * pointer before it is passed to the FDCT code.)
+  * Note that the number of samples fetched by the FDCT routine is
+  * DCT_h_scaled_size * DCT_v_scaled_size.
+  * The DCT outputs are returned scaled up by a factor of 8; they therefore
+  * have a range of +-8K for 8-bit data, +-128K for 12-bit data.  This
+  * convention improves accuracy in integer implementations and saves some
+  * work in floating-point ones.
+  * Quantization of the output coefficients is done by jcdctmgr.c.
+  */
 
 #if BITS_IN_JSAMPLE == 8
 typedef int DCTELEM;		/* 16 or 32 bits is fine */
@@ -39,11 +39,11 @@ typedef INT32 DCTELEM;		/* must have 32 bits */
 #endif
 
 typedef JMETHOD(void, forward_DCT_method_ptr, (DCTELEM * data,
-					       JSAMPARRAY sample_data,
-					       JDIMENSION start_col));
+	JSAMPARRAY sample_data,
+	JDIMENSION start_col));
 typedef JMETHOD(void, float_DCT_method_ptr, (FAST_FLOAT * data,
-					     JSAMPARRAY sample_data,
-					     JDIMENSION start_col));
+	JSAMPARRAY sample_data,
+	JDIMENSION start_col));
 
 
 /*
@@ -57,11 +57,11 @@ typedef JMETHOD(void, float_DCT_method_ptr, (FAST_FLOAT * data,
  * DCT_h_scaled_size * DCT_v_scaled_size.
  */
 
-/* typedef inverse_DCT_method_ptr is declared in jpegint.h */
+ /* typedef inverse_DCT_method_ptr is declared in jpegint.h */
 
-/*
- * Each IDCT routine has its own ideas about the best dct_table element type.
- */
+ /*
+  * Each IDCT routine has its own ideas about the best dct_table element type.
+  */
 
 typedef MULTIPLIER ISLOW_MULT_TYPE; /* short or int, whichever is faster */
 #if BITS_IN_JSAMPLE == 8
@@ -90,7 +90,7 @@ typedef FAST_FLOAT FLOAT_MULT_TYPE; /* preferred floating type */
 #define IDCT_range_limit(cinfo)  ((cinfo)->sample_range_limit - RANGE_SUBSET)
 
 
-/* Short forms of external names for systems with brain-damaged linkers. */
+ /* Short forms of external names for systems with brain-damaged linkers. */
 
 #ifdef NEED_SHORT_EXTERNAL_NAMES
 #define jpeg_fdct_islow		jFDislow
@@ -166,176 +166,176 @@ typedef FAST_FLOAT FLOAT_MULT_TYPE; /* preferred floating type */
 /* Extern declarations for the forward and inverse DCT routines. */
 
 EXTERN(void) jpeg_fdct_islow
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_ifast
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_float
-    JPP((FAST_FLOAT * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((FAST_FLOAT * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_7x7
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_6x6
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_5x5
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_4x4
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_3x3
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_2x2
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_1x1
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_9x9
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_10x10
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_11x11
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_12x12
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_13x13
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_14x14
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_15x15
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_16x16
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_16x8
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_14x7
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_12x6
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_10x5
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_8x4
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_6x3
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_4x2
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_2x1
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_8x16
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_7x14
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_6x12
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_5x10
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_4x8
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_3x6
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_2x4
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 EXTERN(void) jpeg_fdct_1x2
-    JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
+JPP((DCTELEM * data, JSAMPARRAY sample_data, JDIMENSION start_col));
 
 EXTERN(void) jpeg_idct_islow
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_ifast
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_float
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_7x7
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_6x6
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_5x5
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_4x4
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_3x3
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_2x2
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_1x1
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_9x9
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_10x10
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_11x11
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_12x12
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_13x13
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_14x14
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_15x15
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_16x16
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_16x8
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_14x7
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_12x6
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_10x5
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_8x4
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_6x3
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_4x2
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_2x1
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_8x16
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_7x14
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_6x12
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_5x10
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_4x8
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_3x6
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_2x4
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 EXTERN(void) jpeg_idct_1x2
-    JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
-	 JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
+JPP((j_decompress_ptr cinfo, jpeg_component_info * compptr,
+	JCOEFPTR coef_block, JSAMPARRAY output_buf, JDIMENSION output_col));
 
 
 /*
@@ -351,28 +351,28 @@ EXTERN(void) jpeg_idct_1x2
 #define ONE	((INT32) 1)
 #define CONST_SCALE (ONE << CONST_BITS)
 
-/* Convert a positive real constant to an integer scaled by CONST_SCALE.
- * Caution: some C compilers fail to reduce "FIX(constant)" at compile time,
- * thus causing a lot of useless floating-point operations at run time.
- */
+ /* Convert a positive real constant to an integer scaled by CONST_SCALE.
+  * Caution: some C compilers fail to reduce "FIX(constant)" at compile time,
+  * thus causing a lot of useless floating-point operations at run time.
+  */
 
 #define FIX(x)	((INT32) ((x) * CONST_SCALE + 0.5))
 
-/* Descale and correctly round an INT32 value that's scaled by N bits.
- * We assume RIGHT_SHIFT rounds towards minus infinity, so adding
- * the fudge factor is correct for either sign of X.
- */
+  /* Descale and correctly round an INT32 value that's scaled by N bits.
+   * We assume RIGHT_SHIFT rounds towards minus infinity, so adding
+   * the fudge factor is correct for either sign of X.
+   */
 
 #define DESCALE(x,n)  RIGHT_SHIFT((x) + (ONE << ((n)-1)), n)
 
-/* Multiply an INT32 variable by an INT32 constant to yield an INT32 result.
- * This macro is used only when the two inputs will actually be no more than
- * 16 bits wide, so that a 16x16->32 bit multiply can be used instead of a
- * full 32x32 multiply.  This provides a useful speedup on many machines.
- * Unfortunately there is no way to specify a 16x16->32 multiply portably
- * in C, but some C compilers will do the right thing if you provide the
- * correct combination of casts.
- */
+   /* Multiply an INT32 variable by an INT32 constant to yield an INT32 result.
+	* This macro is used only when the two inputs will actually be no more than
+	* 16 bits wide, so that a 16x16->32 bit multiply can be used instead of a
+	* full 32x32 multiply.  This provides a useful speedup on many machines.
+	* Unfortunately there is no way to specify a 16x16->32 multiply portably
+	* in C, but some C compilers will do the right thing if you provide the
+	* correct combination of casts.
+	*/
 
 #ifdef SHORTxSHORT_32		/* may work if 'int' is 32 bits */
 #define MULTIPLY16C16(var,const)  (((INT16) (var)) * ((INT16) (const)))
@@ -385,7 +385,7 @@ EXTERN(void) jpeg_idct_1x2
 #define MULTIPLY16C16(var,const)  ((var) * (const))
 #endif
 
-/* Same except both inputs are variables. */
+	/* Same except both inputs are variables. */
 
 #ifdef SHORTxSHORT_32		/* may work if 'int' is 32 bits */
 #define MULTIPLY16V16(var1,var2)  (((INT16) (var1)) * ((INT16) (var2)))
