@@ -68,8 +68,7 @@ JPP((j_decompress_ptr cinfo, bmp_dest_ptr dest,
  * In this module rows_supplied will always be 1.
  */
 
-METHODDEF(void)
-put_pixel_rows(j_decompress_ptr cinfo, djpeg_dest_ptr dinfo,
+METHODDEF(void) put_pixel_rows(j_decompress_ptr cinfo, djpeg_dest_ptr dinfo,
 	JDIMENSION rows_supplied)
 	/* This version is for writing 24-bit pixels */
 {
@@ -103,8 +102,7 @@ put_pixel_rows(j_decompress_ptr cinfo, djpeg_dest_ptr dinfo,
 		*outptr++ = 0;
 }
 
-METHODDEF(void)
-put_gray_rows(j_decompress_ptr cinfo, djpeg_dest_ptr dinfo,
+METHODDEF(void) put_gray_rows(j_decompress_ptr cinfo, djpeg_dest_ptr dinfo,
 	JDIMENSION rows_supplied)
 	/* This version is for grayscale OR quantized color output */
 {
@@ -139,8 +137,7 @@ put_gray_rows(j_decompress_ptr cinfo, djpeg_dest_ptr dinfo,
  * In this module we may as well postpone everything until finish_output.
  */
 
-METHODDEF(void)
-start_output_bmp(j_decompress_ptr cinfo, djpeg_dest_ptr dinfo)
+METHODDEF(void) start_output_bmp(j_decompress_ptr cinfo, djpeg_dest_ptr dinfo)
 {
 	/* no work here */
 }
@@ -154,8 +151,7 @@ start_output_bmp(j_decompress_ptr cinfo, djpeg_dest_ptr dinfo)
  * First, routines to write the Windows and OS/2 variants of the file header.
  */
 
-LOCAL(void)
-write_bmp_header(j_decompress_ptr cinfo, bmp_dest_ptr dest)
+LOCAL(void) write_bmp_header(j_decompress_ptr cinfo, bmp_dest_ptr dest)
 /* Write a Windows-style BMP file header, including colormap if needed */
 {
 	char bmpfileheader[14];
@@ -229,8 +225,7 @@ write_bmp_header(j_decompress_ptr cinfo, bmp_dest_ptr dest)
 }
 
 
-LOCAL(void)
-write_os2_header(j_decompress_ptr cinfo, bmp_dest_ptr dest)
+LOCAL(void) write_os2_header(j_decompress_ptr cinfo, bmp_dest_ptr dest)
 /* Write an OS2-style BMP file header, including colormap if needed */
 {
 	char bmpfileheader[14];
@@ -293,8 +288,7 @@ write_os2_header(j_decompress_ptr cinfo, bmp_dest_ptr dest)
  * Windows uses BGR0 map entries; OS/2 uses BGR entries.
  */
 
-LOCAL(void)
-write_colormap(j_decompress_ptr cinfo, bmp_dest_ptr dest,
+LOCAL(void) write_colormap(j_decompress_ptr cinfo, bmp_dest_ptr dest,
 	int map_colors, int map_entry_size)
 {
 	JSAMPARRAY colormap = cinfo->colormap;
@@ -347,8 +341,7 @@ write_colormap(j_decompress_ptr cinfo, bmp_dest_ptr dest,
 }
 
 
-METHODDEF(void)
-finish_output_bmp(j_decompress_ptr cinfo, djpeg_dest_ptr dinfo)
+METHODDEF(void) finish_output_bmp(j_decompress_ptr cinfo, djpeg_dest_ptr dinfo)
 {
 	bmp_dest_ptr dest = (bmp_dest_ptr)dinfo;
 	register FILE * outfile = dest->pub.output_file;
@@ -393,8 +386,7 @@ finish_output_bmp(j_decompress_ptr cinfo, djpeg_dest_ptr dinfo)
  * The module selection routine for BMP format output.
  */
 
-GLOBAL(djpeg_dest_ptr)
-jinit_write_bmp(j_decompress_ptr cinfo, boolean is_os2)
+GLOBAL(djpeg_dest_ptr) jinit_write_bmp(j_decompress_ptr cinfo, boolean is_os2)
 {
 	bmp_dest_ptr dest;
 	JDIMENSION row_width;

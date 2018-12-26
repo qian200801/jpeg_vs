@@ -87,8 +87,7 @@ static const char * progname;	/* program name for error messages */
 static char * outfilename;	/* for -outfile switch */
 
 
-LOCAL(void)
-usage(void)
+LOCAL(void) usage(void)
 /* complain about bad command line */
 {
 	fprintf(stderr, "usage: %s [switches] ", progname);
@@ -160,8 +159,7 @@ usage(void)
 }
 
 
-LOCAL(int)
-parse_switches(j_decompress_ptr cinfo, int argc, char **argv,
+LOCAL(int) parse_switches(j_decompress_ptr cinfo, int argc, char **argv,
 	int last_file_arg_seen, boolean for_real)
 	/* Parse optional switches.
 	 * Returns argv[] index of first file-name argument (== argc if none).
@@ -381,8 +379,7 @@ parse_switches(j_decompress_ptr cinfo, int argc, char **argv,
  * Note this code relies on a non-suspending data source.
  */
 
-LOCAL(unsigned int)
-jpeg_getc(j_decompress_ptr cinfo)
+LOCAL(unsigned int) jpeg_getc(j_decompress_ptr cinfo)
 /* Read next byte */
 {
 	struct jpeg_source_mgr * datasrc = cinfo->src;
@@ -396,8 +393,7 @@ jpeg_getc(j_decompress_ptr cinfo)
 }
 
 
-METHODDEF(boolean)
-print_text_marker(j_decompress_ptr cinfo)
+METHODDEF(boolean) print_text_marker(j_decompress_ptr cinfo)
 {
 	boolean traceit = (cinfo->err->trace_level >= 1);
 	INT32 length;
@@ -455,8 +451,7 @@ print_text_marker(j_decompress_ptr cinfo)
  * The main program.
  */
 
-int
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	struct jpeg_decompress_struct cinfo;
 	struct jpeg_error_mgr jerr;

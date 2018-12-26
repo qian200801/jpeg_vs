@@ -31,8 +31,7 @@
 
 static j_common_ptr sig_cinfo;
 
-void				/* must be global for Manx C */
-signal_catcher(int signum)
+void signal_catcher(int signum)	 			/* must be global for Manx C */
 {
 	if (sig_cinfo != NULL) {
 		if (sig_cinfo->err != NULL) /* turn off trace output */
@@ -43,8 +42,7 @@ signal_catcher(int signum)
 }
 
 
-GLOBAL(void)
-enable_signal_catcher(j_common_ptr cinfo)
+GLOBAL(void) enable_signal_catcher(j_common_ptr cinfo)
 {
 	sig_cinfo = cinfo;
 #ifdef SIGINT			/* not all systems have SIGINT */
@@ -64,8 +62,7 @@ enable_signal_catcher(j_common_ptr cinfo)
 
 #ifdef PROGRESS_REPORT
 
-METHODDEF(void)
-progress_monitor(j_common_ptr cinfo)
+METHODDEF(void)  progress_monitor(j_common_ptr cinfo)
 {
 	cd_progress_ptr prog = (cd_progress_ptr)cinfo->progress;
 	int total_passes = prog->pub.total_passes + prog->total_extra_passes;
@@ -86,8 +83,7 @@ progress_monitor(j_common_ptr cinfo)
 }
 
 
-GLOBAL(void)
-start_progress_monitor(j_common_ptr cinfo, cd_progress_ptr progress)
+GLOBAL(void) start_progress_monitor(j_common_ptr cinfo, cd_progress_ptr progress)
 {
 	/* Enable progress display, unless trace output is on */
 	if (cinfo->err->trace_level == 0) {
@@ -100,8 +96,7 @@ start_progress_monitor(j_common_ptr cinfo, cd_progress_ptr progress)
 }
 
 
-GLOBAL(void)
-end_progress_monitor(j_common_ptr cinfo)
+GLOBAL(void) end_progress_monitor(j_common_ptr cinfo)
 {
 	/* Clear away progress display */
 	if (cinfo->err->trace_level == 0) {
@@ -119,8 +114,7 @@ end_progress_monitor(j_common_ptr cinfo)
  * minchars is length of minimum legal abbreviation.
  */
 
-GLOBAL(boolean)
-keymatch(char * arg, const char * keyword, int minchars)
+GLOBAL(boolean) keymatch(char * arg, const char * keyword, int minchars)
 {
 	register int ca, ck;
 	register int nmatched = 0;
@@ -146,8 +140,7 @@ keymatch(char * arg, const char * keyword, int minchars)
  * Non-Unix systems often require some hacking to get out of text mode.
  */
 
-GLOBAL(FILE *)
-read_stdin(void)
+GLOBAL(FILE *) read_stdin(void)
 {
 	FILE * input_file = stdin;
 
@@ -164,8 +157,7 @@ read_stdin(void)
 }
 
 
-GLOBAL(FILE *)
-write_stdout(void)
+GLOBAL(FILE *) write_stdout(void)
 {
 	FILE * output_file = stdout;
 

@@ -42,8 +42,7 @@ static JCOPY_OPTION copyoption;	/* -copy switch */
 static jpeg_transform_info transformoption; /* image transformation options */
 
 
-LOCAL(void)
-usage(void)
+LOCAL(void) usage(void)
 /* complain about bad command line */
 {
 	fprintf(stderr, "usage: %s [switches] ", progname);
@@ -94,8 +93,7 @@ usage(void)
 }
 
 
-LOCAL(void)
-select_transform(JXFORM_CODE transform)
+LOCAL(void) select_transform(JXFORM_CODE transform)
 /* Silly little routine to detect multiple transform options,
  * which we can't handle.
  */
@@ -118,8 +116,7 @@ select_transform(JXFORM_CODE transform)
 }
 
 
-LOCAL(int)
-parse_switches(j_compress_ptr cinfo, int argc, char **argv,
+LOCAL(int) parse_switches(j_compress_ptr cinfo, int argc, char **argv,
 	int last_file_arg_seen, boolean for_real)
 	/* Parse optional switches.
 	 * Returns argv[] index of first file-name argument (== argc if none).
@@ -406,8 +403,7 @@ parse_switches(j_compress_ptr cinfo, int argc, char **argv,
  * The main program.
  */
 
-int
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	struct jpeg_decompress_struct srcinfo;
 	struct jpeg_compress_struct dstinfo;

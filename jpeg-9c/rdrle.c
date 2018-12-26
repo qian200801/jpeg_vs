@@ -79,8 +79,7 @@ typedef struct _rle_source_struct {
  * Read the file header; return image size and component count.
  */
 
-METHODDEF(void)
-start_input_rle(j_compress_ptr cinfo, cjpeg_source_ptr sinfo)
+METHODDEF(void) start_input_rle(j_compress_ptr cinfo, cjpeg_source_ptr sinfo)
 {
 	rle_source_ptr source = (rle_source_ptr)sinfo;
 	JDIMENSION width, height;
@@ -191,8 +190,7 @@ start_input_rle(j_compress_ptr cinfo, cjpeg_source_ptr sinfo)
  * Used for GRAYSCALE, MAPPEDGRAY, TRUECOLOR, and DIRECTCOLOR images.
  */
 
-METHODDEF(JDIMENSION)
-get_rle_row(j_compress_ptr cinfo, cjpeg_source_ptr sinfo)
+METHODDEF(JDIMENSION) get_rle_row(j_compress_ptr cinfo, cjpeg_source_ptr sinfo)
 {
 	rle_source_ptr source = (rle_source_ptr)sinfo;
 
@@ -209,8 +207,7 @@ get_rle_row(j_compress_ptr cinfo, cjpeg_source_ptr sinfo)
  * Used for PSEUDOCOLOR images.
  */
 
-METHODDEF(JDIMENSION)
-get_pseudocolor_row(j_compress_ptr cinfo, cjpeg_source_ptr sinfo)
+METHODDEF(JDIMENSION) get_pseudocolor_row(j_compress_ptr cinfo, cjpeg_source_ptr sinfo)
 {
 	rle_source_ptr source = (rle_source_ptr)sinfo;
 	JSAMPROW src_row, dest_row;
@@ -245,8 +242,7 @@ get_pseudocolor_row(j_compress_ptr cinfo, cjpeg_source_ptr sinfo)
  * the appropriate row-reading routine.
  */
 
-METHODDEF(JDIMENSION)
-load_image(j_compress_ptr cinfo, cjpeg_source_ptr sinfo)
+METHODDEF(JDIMENSION) load_image(j_compress_ptr cinfo, cjpeg_source_ptr sinfo)
 {
 	rle_source_ptr source = (rle_source_ptr)sinfo;
 	JDIMENSION row, col;
@@ -365,8 +361,7 @@ load_image(j_compress_ptr cinfo, cjpeg_source_ptr sinfo)
  * Finish up at the end of the file.
  */
 
-METHODDEF(void)
-finish_input_rle(j_compress_ptr cinfo, cjpeg_source_ptr sinfo)
+METHODDEF(void) finish_input_rle(j_compress_ptr cinfo, cjpeg_source_ptr sinfo)
 {
 	/* no work */
 }
@@ -376,8 +371,7 @@ finish_input_rle(j_compress_ptr cinfo, cjpeg_source_ptr sinfo)
  * The module selection routine for RLE format input.
  */
 
-GLOBAL(cjpeg_source_ptr)
-jinit_read_rle(j_compress_ptr cinfo)
+GLOBAL(cjpeg_source_ptr) jinit_read_rle(j_compress_ptr cinfo)
 {
 	rle_source_ptr source;
 
