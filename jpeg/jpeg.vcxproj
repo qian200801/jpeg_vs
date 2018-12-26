@@ -152,6 +152,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\jpeg-9c\jaricom.c" />
+    <ClCompile Include="..\jpeg-9c\jcapimin.c" />
+    <ClCompile Include="..\jpeg-9c\jcapistd.c" />
+    <ClCompile Include="..\jpeg-9c\jcarith.c" />
+    <ClCompile Include="..\jpeg-9c\jccoefct.c" />
+    <ClCompile Include="..\jpeg-9c\jccolor.c" />
+    <ClCompile Include="..\jpeg-9c\jcdctmgr.c" />
+    <ClCompile Include="..\jpeg-9c\jchuff.c" />
+    <ClCompile Include="..\jpeg-9c\jcinit.c" />
+    <ClCompile Include="..\jpeg-9c\jcmainct.c" />
+    <ClCompile Include="..\jpeg-9c\jcmarker.c" />
+    <ClCompile Include="..\jpeg-9c\jcmaster.c" />
+    <ClCompile Include="..\jpeg-9c\jcomapi.c" />
     <ClCompile Include="..\jpeg-9c\jcparam.c" />
     <ClCompile Include="..\jpeg-9c\jcprepct.c" />
     <ClCompile Include="..\jpeg-9c\jcsample.c" />

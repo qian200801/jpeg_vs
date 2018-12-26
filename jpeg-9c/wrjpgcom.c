@@ -89,8 +89,7 @@ static FILE * outfile;		/* output JPEG file */
 
 
 /* Read one byte, testing for EOF */
-static int
-read_1_byte(void)
+static int read_1_byte(void)
 {
 	int c;
 
@@ -102,8 +101,7 @@ read_1_byte(void)
 
 /* Read 2 bytes, convert to unsigned int */
 /* All 2-byte quantities in JPEG markers are MSB first */
-static unsigned int
-read_2_bytes(void)
+static unsigned int read_2_bytes(void)
 {
 	int c1, c2;
 
@@ -118,29 +116,24 @@ read_2_bytes(void)
 
 
 /* Routines to write data to output file */
-
-static void
-write_1_byte(int c)
+static void write_1_byte(int c)
 {
 	PUTBYTE(c);
 }
 
-static void
-write_2_bytes(unsigned int val)
+static void write_2_bytes(unsigned int val)
 {
 	PUTBYTE((val >> 8) & 0xFF);
 	PUTBYTE(val & 0xFF);
 }
 
-static void
-write_marker(int marker)
+static void write_marker(int marker)
 {
 	PUTBYTE(0xFF);
 	PUTBYTE(marker);
 }
 
-static void
-copy_rest_of_file(void)
+static void copy_rest_of_file(void)
 {
 	int c;
 
@@ -184,8 +177,7 @@ copy_rest_of_file(void)
   * not deal correctly with FF/00 sequences in the compressed image data...
   */
 
-static int
-next_marker(void)
+static int next_marker(void)
 {
 	int c;
 	int discarded_bytes = 0;
@@ -219,8 +211,7 @@ next_marker(void)
  * file and then return a misleading error message...
  */
 
-static int
-first_marker(void)
+static int first_marker(void)
 {
 	int c1, c2;
 
@@ -241,8 +232,7 @@ first_marker(void)
  * such bytes do NOT introduce new markers.
  */
 
-static void
-copy_variable(void)
+static void copy_variable(void)
 /* Copy an unknown or uninteresting variable-length marker */
 {
 	unsigned int length;
@@ -261,8 +251,7 @@ copy_variable(void)
 	}
 }
 
-static void
-skip_variable(void)
+static void skip_variable(void)
 /* Skip over an unknown or uninteresting variable-length marker */
 {
 	unsigned int length;
@@ -286,8 +275,7 @@ skip_variable(void)
  * copy data to output, but discard COM markers unless keep_COM is true.
  */
 
-static int
-scan_JPEG_header(int keep_COM)
+static int scan_JPEG_header(int keep_COM)
 {
 	int marker;
 
@@ -349,8 +337,7 @@ scan_JPEG_header(int keep_COM)
 static const char * progname;	/* program name for error messages */
 
 
-static void
-usage(void)
+static void usage(void)
 /* complain about bad command line */
 {
 	fprintf(stderr, "wrjpgcom inserts a textual comment in a JPEG file.\n");
@@ -382,8 +369,7 @@ usage(void)
 }
 
 
-static int
-keymatch(char * arg, const char * keyword, int minchars)
+static int keymatch(char * arg, const char * keyword, int minchars)
 /* Case-insensitive matching of (possibly abbreviated) keyword switches. */
 /* keyword is the constant keyword (must be lower case already), */
 /* minchars is length of minimum legal abbreviation. */
