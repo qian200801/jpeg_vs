@@ -73,8 +73,7 @@ static FILE * infile;		/* input JPEG file */
 
 
 /* Read one byte, testing for EOF */
-static int
-read_1_byte(void)
+static int read_1_byte(void)
 {
 	int c;
 
@@ -86,8 +85,7 @@ read_1_byte(void)
 
 /* Read 2 bytes, convert to unsigned int */
 /* All 2-byte quantities in JPEG markers are MSB first */
-static unsigned int
-read_2_bytes(void)
+static unsigned int read_2_bytes(void)
 {
 	int c1, c2;
 
@@ -138,8 +136,7 @@ read_2_bytes(void)
   * not deal correctly with FF/00 sequences in the compressed image data...
   */
 
-static int
-next_marker(void)
+static int next_marker(void)
 {
 	int c;
 	int discarded_bytes = 0;
@@ -173,8 +170,7 @@ next_marker(void)
  * file and then return a misleading error message...
  */
 
-static int
-first_marker(void)
+static int first_marker(void)
 {
 	int c1, c2;
 
@@ -195,8 +191,7 @@ first_marker(void)
  * such bytes do NOT introduce new markers.
  */
 
-static void
-skip_variable(void)
+static void skip_variable(void)
 /* Skip over an unknown or uninteresting variable-length marker */
 {
 	unsigned int length;
@@ -221,8 +216,7 @@ skip_variable(void)
  * we must guard against non-text junk and varying newline representations.
  */
 
-static void
-process_COM(int raw)
+static void process_COM(int raw)
 {
 	unsigned int length;
 	int ch;
@@ -283,8 +277,7 @@ process_COM(int raw)
  * This code is only needed if you want to know the image dimensions...
  */
 
-static void
-process_SOFn(int marker)
+static void process_SOFn(int marker)
 {
 	unsigned int length;
 	unsigned int image_height, image_width;
@@ -341,8 +334,7 @@ process_SOFn(int marker)
  * for special code to handle SOFn; we could treat it like other markers.)
  */
 
-static int
-scan_JPEG_header(int verbose, int raw)
+static int scan_JPEG_header(int verbose, int raw)
 {
 	int marker;
 
@@ -411,8 +403,7 @@ scan_JPEG_header(int verbose, int raw)
 static const char * progname;	/* program name for error messages */
 
 
-static void
-usage(void)
+static void usage(void)
 /* complain about bad command line */
 {
 	fprintf(stderr, "rdjpgcom displays any textual comments in a JPEG file.\n");
@@ -427,8 +418,7 @@ usage(void)
 }
 
 
-static int
-keymatch(char * arg, const char * keyword, int minchars)
+static int keymatch(char * arg, const char * keyword, int minchars)
 /* Case-insensitive matching of (possibly abbreviated) keyword switches. */
 /* keyword is the constant keyword (must be lower case already), */
 /* minchars is length of minimum legal abbreviation. */
@@ -456,8 +446,7 @@ keymatch(char * arg, const char * keyword, int minchars)
  * The main program.
  */
 
-int
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	int argn;
 	char * arg;
